@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Lending Platform{% endblock %}</title>
+    <style>
+       
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f7f6; display: flex; height: 100vh; overflow: hidden; }
+        
+       
+        .sidebar { width: 260px; background: #2c3e50; color: white; display: flex; flex-direction: column; flex-shrink: 0; }
+        .sidebar-header { padding: 20px; font-size: 20px; font-weight: bold; background: #1a252f; text-align: center; }
+        .sidebar-menu { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+        .sidebar-menu li { border-bottom: 1px solid #34495e; }
+        .sidebar-menu a { display: block; padding: 15px 20px; color: #bdc3c7; text-decoration: none; transition: 0.3s; }
+        .sidebar-menu a:hover, .sidebar-menu a.active { background: #34495e; color: white; border-left: 5px solid #3498db; }
+        
+      
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        
+       
+        .top-bar { background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .user-info { font-weight: bold; color: #333; }
+        
+      
+        .page-container { padding: 30px; }
+        .btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+   
+    <div class="sidebar">
+        <div class="sidebar-header">Financial Tech App</div>
+        <ul class="sidebar-menu">
+            
+            <li><a href="{% url 'dashboard' %}">📊 Dashboard</a></li>
+            <li><a href="{% url 'profile' %}">👤 My Profile (KYC)</a></li>
+            <li><a href="{% url 'apply_loan' %}">📝 Apply for Loan</a></li>
+            <li><a href="{% url 'my_loans' %}">📂 Active Loans</a></li>
+            <li><a href="{% url 'payments' %}">💳 Payments & EMI</a></li>
+            <li><a href="{% url 'notifications' %}">🔔 Notifications</a></li>
+            <li><a href="{% url 'history' %}">📜 Transaction History</a></li>
+            <li><a href="{% url 'support' %}">📞 Help & Support</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="top-bar">
+            <div class="user-info">Welcome, {{ user.first_name }} {{ user.last_name }}</div>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+        </div>
+        <div class="page-container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

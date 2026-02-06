@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Finance Management</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #f0f2f5; }
+        .container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+        .btn { display: block; width: 250px; padding: 15px; margin: 15px auto; text-decoration: none; color: white; border-radius: 5px; font-weight: bold; }
+        .btn-user { background: #000408; }
+        .btn-admin { background: #343a40; border: 2px solid #333; }
+        .btn-register { background: #000e03; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1> Digital Finance Management</h1>
+        
+        <a href="{% url 'login' %}" class="btn btn-user">Customer Login</a>
+
+        <a href="/admin/" class="btn btn-admin"> Admin </a>
+    </div>
+
+</body>
+</html>

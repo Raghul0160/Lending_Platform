@@ -1,0 +1,10 @@
+{% extends 'base_dashboard.html' %}
+{% block content %}
+<h2>Update KYC Details</h2>
+<p>Before applying, we need your documents.</p>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save & Continue</button>
+</form>
+{% endblock %} 

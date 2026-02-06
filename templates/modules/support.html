@@ -1,0 +1,51 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <h2>📞 Help & Support</h2>
+    <p style="color: #666;">We are here to assist you 24/7.</p>
+    <hr>
+
+    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+        
+        <div style="flex: 2; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            <h3 style="margin-top: 0;">Frequently Asked Questions</h3>
+            
+            <details style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <summary style="font-weight: bold; cursor: pointer;">How do I apply for a loan?</summary>
+                <p style="color: #555; margin-top: 5px;">Go to the "Apply Loan" section, verify your KYC, select your loan type, and submit the form.</p>
+            </details>
+
+            <details style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <summary style="font-weight: bold; cursor: pointer;">How long does approval take?</summary>
+                <p style="color: #555; margin-top: 5px;">Approvals are usually processed within 24-48 hours after document verification.</p>
+            </details>
+
+            <details style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                <summary style="font-weight: bold; cursor: pointer;">Can I pay my EMI early?</summary>
+                <p style="color: #555; margin-top: 5px;">Yes! Go to the "Payments" section. There are no penalties for early repayment.</p>
+            </details>
+        </div>
+
+        <div style="flex: 1; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content;">
+            <h3 style="margin-top: 0;">Contact Us</h3>
+            
+            <div style="margin-bottom: 20px;">
+                <strong>📍 Head Office</strong>
+                <p style="margin: 5px 0; color: #666;">2nd Floor, Bosco Street,<br>Pudhupettai, Tirupathur</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <strong>📞 Customer Care</strong>
+                <p style="margin: 5px 0; color: #666;">+91 7845172206</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <strong>📧 Email Support</strong>
+                <p style="margin: 5px 0; color: #666;">support@lendingapp.com</p>
+            </div>
+            
+            <button style="width: 100%; background: #2c3e50; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Chat with Agent</button>
+        </div>
+
+    </div>
+{% endblock %}

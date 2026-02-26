@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - Lending Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 { color: #333; margin: 0 0 10px 0; }
+        p { color: #666; font-size: 14px; margin-bottom: 25px; }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; 
+            font-size: 24px;
+            text-align: center;
+            letter-spacing: 10px;
+            font-weight: bold;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            background-color: #303b6e;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #7c54d1;
+        }
+
+        .error-msg {
+            color: #dc3545;
+            background: #ffe6e6;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h2>Check your Email</h2>
+        <p>We sent a 6-digit code to <strong>{{ email }}</strong>.<br>Enter it below to activate your account.</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error-msg">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <input type="text" name="otp" placeholder="XXXXXX" maxlength="6" required autofocus>
+
+            <button type="submit" class="btn-submit">Verify Account</button>
+        </form>
+    </div>
+
+</body>
+</html>

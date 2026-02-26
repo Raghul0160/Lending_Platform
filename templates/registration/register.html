@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Lending Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .register-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+          
+            max-height: 90vh; 
+            overflow-y: auto;
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .register-header h2 {
+            color: #333;
+            margin: 0;
+        }
+        .register-header p {
+            color: #666;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; 
+            font-size: 14px;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        
+       
+        .btn-submit {
+            width: 100%;
+            background-color: #303b6e;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #7c54d1;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .footer-links a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+       
+        .error-list {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+            list-style: none;
+            padding: 0;
+            background-color: #ffe6e6;
+            border-radius: 4px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <div class="register-header">
+            <h2>Create Account</h2>
+            <p>Join our secure lending platform today</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+           
+            {% for field in form %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    
+                    {% if field.errors %}
+                        <ul class="error-list">
+                            {% for error in field.errors %}
+                                <li>⚠️ {{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-submit">Register</button>
+        </form>
+
+        <div class="footer-links">
+            Already have an account? <a href="{% url 'login' %}">Log In</a>
+        </div>
+    </div>
+
+</body>
+</html>

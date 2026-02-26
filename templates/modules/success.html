@@ -1,0 +1,11 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <div style="text-align: center; padding: 50px;">
+        <h1 style="color: green; font-size: 50px;">✅</h1>
+        <h2>Payment Successful!</h2>
+        <p>Your EMI has been marked as paid.</p>
+        <br>
+        <a href="{% url 'payments' %}" style="background: #2c3e50; color: white; padding: 10px 20px; text-decoration: none;">Back to Payments</a>
+    </div>
+{% endblock %}

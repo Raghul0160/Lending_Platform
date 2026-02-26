@@ -1,0 +1,114 @@
+{% extends 'base_dashboard.html' %}
+
+{% block content %}
+    <h2>💳 Payments & EMI Center</h2>
+    <p style="color: #666;">Manage your repayment schedule and avoid late fees.</p>
+    <hr>
+
+    {% if overdue %}
+        <div style="margin-bottom: 30px;">
+            <h3 style="color: #dc3545;">⚠️ Overdue Payments (Late)</h3>
+            <div style="background: #fff5f5; border: 1px solid #f5c6cb; border-radius: 8px; overflow: hidden;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #dc3545; color: white;">
+                        <tr>
+                            <th style="padding: 12px; text-align: left;">Loan ID</th>
+                            <th style="padding: 12px; text-align: left;">Due Date</th>
+                            <th style="padding: 12px; text-align: left;">Late By</th>
+                            <th style="padding: 12px; text-align: left;">Amount</th>
+                            <th style="padding: 12px; text-align: left;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emi in overdue %}
+                        <tr>
+                            <td style="padding: 12px;">#{{ emi.loan.id }}</td>
+                            <td style="padding: 12px; font-weight: bold;">{{ emi.due_date|date:"d M, Y" }}</td>
+                            <td style="padding: 12px; color: red;">
+                                <strong>{{ emi.due_date|timesince:today }} ago</strong>
+                            </td>
+                            <td style="padding: 12px; font-weight: bold;">${{ emi.amount }}</td>
+                            <td style="padding: 12px;">
+                                <a href="{% url 'initiate_payment' emi.id %}" style="background: #dc3545; color: white; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-weight: bold;">
+                                    PAY NOW
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <div style="margin-bottom: 30px;">
+        <h3 style="color: #007bff;">📅 Due This Month</h3>
+        {% if current %}
+            <div style="background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #007bff; color: white;">
+                        <tr>
+                            <th style="padding: 12px; text-align: left;">Loan ID</th>
+                            <th style="padding: 12px; text-align: left;">Due Date</th>
+                            <th style="padding: 12px; text-align: left;">Time Left</th>
+                            <th style="padding: 12px; text-align: left;">Amount</th>
+                            <th style="padding: 12px; text-align: left;">Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emi in current %}
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 12px;">#{{ emi.loan.id }}</td>
+                            <td style="padding: 12px;">{{ emi.due_date|date:"d M, Y" }}</td>
+                            <td style="padding: 12px; color: green; font-weight: bold;">
+                                {{ emi.due_date|timeuntil:today }} left
+                            </td>
+                            <td style="padding: 12px; font-weight: bold;">${{ emi.amount }}</td>
+                            <td style="padding: 12px;">
+                                <a href="{% url 'initiate_payment' emi.id %}" style="background: #28a745; color: white; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-weight: bold;">
+                                    Pay via Razorpay
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div style="background: #e6ffec; padding: 20px; border-radius: 8px; color: #155724; border: 1px solid #c3e6cb;">
+                ✅ You have no dues for this month!
+            </div>
+        {% endif %}
+    </div>
+
+    {% if upcoming %}
+        <div style="opacity: 0.7;">
+            <h3 style="color: #666;">⏩ Upcoming (Future)</h3>
+            <div style="background: white; border-radius: 8px; overflow: hidden; border: 1px solid #ddd;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #f8f9fa; color: #333;">
+                        <tr>
+                            <th style="padding: 12px; text-align: left;">Loan ID</th>
+                            <th style="padding: 12px; text-align: left;">Due Date</th>
+                            <th style="padding: 12px; text-align: left;">Amount</th>
+                            <th style="padding: 12px; text-align: left;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emi in upcoming %}
+                        <tr style="border-bottom: 1px solid #eee;">
+                            <td style="padding: 12px;">#{{ emi.loan.id }}</td>
+                            <td style="padding: 12px;">{{ emi.due_date|date:"d M, Y" }}</td>
+                            <td style="padding: 12px;">${{ emi.amount }}</td>
+                            <td style="padding: 12px;">
+                                <span style="background: #eee; padding: 4px 8px; border-radius: 4px; font-size: 12px;">LOCKED</span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
